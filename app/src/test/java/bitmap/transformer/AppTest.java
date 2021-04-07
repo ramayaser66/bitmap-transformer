@@ -7,8 +7,32 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
-    }
+
+
+
+
+
+  @Test public void testBitmap(){
+      Bitmap test = new Bitmap("test.bmp");
+      int height = test.height;
+      boolean isValid = false;
+
+      if(height >0){
+          isValid = true;
+      }
+
+      assertTrue("an error with the file path ", isValid);
+
+  }
+
+
+  @Test public void testWriteImage(){
+
+      Bitmap test = new Bitmap("test.bmp");
+
+      boolean isValid =  test.writeImage("test5.bmp");
+      assertTrue("an error with the file path ", isValid);
+
+
+  }
 }

@@ -9,7 +9,7 @@ import java.io.*;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
         Bitmap im = new Bitmap("test.bmp");
         Bitmap im2 = new Bitmap("test.bmp");
@@ -23,7 +23,38 @@ public class App {
         im3.writeImage("test3.bmp");
 
 
-        
+
+// for running from the command line
+        // you should enter 3 args ..
+        //example:  gradle run --args 'test.bmp run2.bmp black'
+        try {
+
+            String inputFile = args[0];
+            String outPutFile = args[1];
+            String transform = args[2];
+
+            Bitmap input = new Bitmap(inputFile);
+            switch (transform) {
+                case "mirror":
+                    input.mirror();
+                    break;
+                case "black":
+                    input.convertToBlackAndWhite();
+                    break;
+                case "blue":
+                    input.convertBlue();
+                    break;
+
+                default:
+                    System.out.println("there is no transformation called" + transform + " please choose mirror or black or blue ...");
+            }
+
+            input.writeImage(outPutFile);
+        }catch(Exception ex){
+            System.out.println("an error occurred with the path from the command line ...");
+
+        }
+
 
 
     }

@@ -13,11 +13,15 @@ public class Bitmap {
     String path;
     BufferedImage img ;
 
-    public Bitmap(String path) throws IOException {
-        this.img = ImageIO.read(new File(path));
+    public Bitmap(String path) {
+        try {
+            this.img = ImageIO.read(new File(path));
 
-        this.height = img.getHeight();
-        this.width = img.getWidth();
+            this.height = img.getHeight();
+            this.width = img.getWidth();
+        }catch(IOException ex){
+            System.out.println("an error occurred while reading the file... " + ex.getMessage());
+        }
     }
 
 
@@ -80,9 +84,16 @@ public class Bitmap {
         }
     }
 
-    public void writeImage(String path) throws IOException {
-        RenderedImage rd = this.img;
-        ImageIO.write(rd, "bmp", new File(path));
+    public boolean writeImage(String path){
+        try {
+            RenderedImage rd = this.img;
+            ImageIO.write(rd, "bmp", new File(path));
+            return true;
+        }catch (IOException ex){
+            System.out.println("an error occurred while writing the file...."+ ex.getMessage());
+            return false;
+        }
+
     }
 
 }
